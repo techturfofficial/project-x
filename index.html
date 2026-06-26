@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="navy">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════
+   RESET
+══════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+
+/* ══════════════════════════════════════════
+   THEMES  — only Black / White / Olive / Navy / Orange
+   Each theme has exactly two accent colours (c1,c2)
+   that drive EVERY coloured element on screen.
+══════════════════════════════════════════ */
+
+/* 1 ── NAVY BLUE */
+[data-theme="navy"]{
+  --bg:#07111f;
+  --c1:#ff6b00;  /* orange primary  */
+  --c2:#ffffff;  /* white secondary */
+  --g1:rgba(255,107,0,.55);
+  --g2:rgba(255,255,255,.30);
+  --blob-a:rgba(255,107,0,.28);
+  --blob-b:rgba(13,27,62,.70);
+  --blob-c:rgba(255,255,255,.06);
+  --art1:rgba(255,107,0,.70);
+  --art2:rgba(13,27,62,.90);
+  --art3:rgba(255,255,255,.40);
+  --center-grad:linear-gradient(160deg,rgba(255,107,0,.18) 0%,rgba(13,27,62,.50) 50%,rgba(255,107,0,.12) 100%);
+  --txt:rgba(255,255,255,.93);
+  --txt2:rgba(255,255,255,.48);
+  --gl:rgba(255,255,255,.07);
+  --gl2:rgba(255,255,255,.12);
+  --bd:rgba(0,0,0,.45);
+  --sd:rgba(0,0,0,.40);
+  --nav-hi:rgba(255,255,255,.13);
+  --prog:linear-gradient(90deg,#ff6b00,#fff);
+  --w1:rgba(255,107,0,.60);
+  --w2:rgba(255,200,100,.35);
+  --w3:rgba(13,27,62,.55);
+}
+/* 2 ── OLIVE GREEN */
+[data-theme="olive"]{
+  --bg:#1a2408;
+  --c1:#ff6b00;
+  --c2:#ffffff;
+  --g1:rgba(255,107,0,.55);
+  --g2:rgba(255,255,255,.28);
+  --blob-a:rgba(255,107,0,.30);
+  --blob-b:rgba(58,80,20,.70);
+  --blob-c:rgba(255,255,255,.05);
+  --art1:rgba(255,107,0,.70);
+  --art2:rgba(40,60,10,.90);
+  --art3:rgba(255,255,255,.35);
+  --center-grad:linear-gradient(160deg,rgba(255,107,0,.18) 0%,rgba(40,60,10,.55) 50%,rgba(107,140,40,.18) 100%);
+  --txt:rgba(255,255,255,.93);
+  --txt2:rgba(255,255,255,.48);
+  --gl:rgba(255,255,255,.07);
+  --gl2:rgba(255,255,255,.12);
+  --bd:rgba(0,0,0,.45);
+  --sd:rgba(0,0,0,.40);
+  --nav-hi:rgba(255,255,255,.13);
+  --prog:linear-gradient(90deg,#ff6b00,#fff);
+  --w1:rgba(255,107,0,.55);
+  --w2:rgba(140,180,40,.40);
+  --w3:rgba(40,60,10,.55);
+}
+/* 3 ── ORANGE */
+[data-theme="orange"]{
+  --bg:#090400;
+  --c1:#ff6b00;
+  --c2:#6b7c2e;  /* olive as second accent */
+  --g1:rgba(255,107,0,.60);
+  --g2:rgba(107,124,46,.42);
+  --blob-a:rgba(255,107,0,.42);
+  --blob-b:rgba(107,124,46,.28);
+  --blob-c:rgba(255,107,0,.12);
+  --art1:rgba(255,107,0,.80);
+  --art2:rgba(9,4,0,.90);
+  --art3:rgba(107,124,46,.50);
+  --center-grad:linear-gradient(160deg,rgba(255,107,0,.28) 0%,rgba(9,4,0,.60) 50%,rgba(107,124,46,.20) 100%);
+  --txt:rgba(255,255,255,.93);
+  --txt2:rgba(255,210,160,.52);
+  --gl:rgba(255,107,0,.07);
+  --gl2:rgba(255,107,0,.13);
+  --bd:rgba(0,0,0,.50);
+  --sd:rgba(0,0,0,.50);
+  --nav-hi:rgba(255,107,0,.20);
+  --prog:linear-gradient(90deg,#ff6b00,#6b7c2e);
+  --w1:rgba(255,107,0,.65);
+  --w2:rgba(107,124,46,.42);
+  --w3:rgba(255,107,0,.22);
+}
+/* 4 ── WHITE */
+[data-theme="white"]{
+  --bg:#eef2f8;
+  --c1:#07111f;  /* navy primary  */
+  --c2:#ff6b00;  /* orange second */
+  --g1:rgba(7,17,31,.22);
+  --g2:rgba(255,107,0,.22);
+  --blob-a:rgba(7,17,31,.07);
+  --blob-b:rgba(255,107,0,.06);
+  --blob-c:rgba(107,124,46,.04);
+  --art1:rgba(7,17,31,.50);
+  --art2:rgba(255,107,0,.35);
+  --art3:rgba(107,124,46,.30);
+  --center-grad:linear-gradient(160deg,rgba(7,17,31,.10) 0%,rgba(255,107,0,.08) 50%,rgba(7,17,31,.06) 100%);
+  --txt:rgba(7,17,31,.92);
+  --txt2:rgba(7,17,31,.45);
+  --gl:rgba(7,17,31,.05);
+  --gl2:rgba(7,17,31,.09);
+  --bd:rgba(0,0,0,.15);
+  --sd:rgba(0,0,0,.07);
+  --nav-hi:rgba(7,17,31,.09);
+  --prog:linear-gradient(90deg,#07111f,#ff6b00);
+  --w1:rgba(7,17,31,.32);
+  --w2:rgba(255,107,0,.28);
+  --w3:rgba(107,124,46,.20);
+}
+/* 5 ── BLACK */
+[data-theme="black"]{
+  --bg:#000000;
+  --c1:#ffffff;
+  --c2:#ff6b00;
+  --g1:rgba(255,255,255,.32);
+  --g2:rgba(255,107,0,.42);
+  --blob-a:rgba(255,255,255,.06);
+  --blob-b:rgba(255,107,0,.14);
+  --blob-c:rgba(255,255,255,.03);
+  --art1:rgba(255,255,255,.55);
+  --art2:rgba(0,0,0,.90);
+  --art3:rgba(255,107,0,.50);
+  --center-grad:linear-gradient(160deg,rgba(255,255,255,.08) 0%,rgba(0,0,0,.70) 50%,rgba(255,107,0,.14) 100%);
+  --txt:rgba(255,255,255,.93);
+  --txt2:rgba(255,255,255,.44);
+  --gl:rgba(255,255,255,.04);
+  --gl2:rgba(255,255,255,.08);
+  --bd:rgba(0,0,0,.55);
+  --sd:rgba(0,0,0,.60);
+  --nav-hi:rgba(255,255,255,.09);
+  --prog:linear-gradient(90deg,#fff,#ff6b00);
+  --w1:rgba(255,255,255,.28);
+  --w2:rgba(255,107,0,.40);
+  --w3:rgba(255,255,255,.12);
+}
+
+/* ══════════════════════════════════════════
+   BASE
+══════════════════════════════════════════ */
+html,body{
+  width:100%;height:100%;
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  overflow:hidden;
+  transition:background .5s ease,color .5s ease;
+}
+
+/* ══════════════════════════════════════════
+   BACKGROUND BLOBS  (match image: big left + big right)
+══════════════════════════════════════════ */
+.blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);transition:background .5s ease;}
+/* left large blob */
+.b1{
+  width:580px;height:580px;top:-180px;left:-120px;
+  background:var(--blob-a);
+  animation:bf1 13s ease-in-out infinite;
+}
+/* right large blob */
+.b2{
+  width:480px;height:480px;bottom:-140px;right:-120px;
+  background:var(--blob-b);
+  animation:bf2 16s ease-in-out infinite;
+}
+/* subtle centre fill */
+.b3{
+  width:400px;height:400px;top:30%;left:35%;
+  background:var(--blob-c);
+  animation:bf3 10s ease-in-out infinite;
+}
+@keyframes bf1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,60px) scale(1.10)}}
+@keyframes bf2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,80px) scale(1.08)}}
+@keyframes bf3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-70px) scale(1.06)}}
+
+/* ══════════════════════════════════════════
+   GLASS CARD  — the single shared style
+══════════════════════════════════════════ */
+.gc{
+  background:var(--gl);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--bd);
+  box-shadow:0 8px 32px var(--sd),inset 0 1px 0 rgba(255,255,255,.08);
+  border-radius:18px;
+  transition:background .5s ease,border-color .5s ease,box-shadow .5s ease;
+}
+
+/* ══════════════════════════════════════════
+   ROOT LAYOUT
+══════════════════════════════════════════ */
+.dash{
+  position:relative;z-index:1;
+  width:100%;height:100vh;
+  display:flex;flex-direction:column;
+  padding:15px 18px;
+  gap:12px;
+}
+
+/* ═══ HEADER ═══ */
+header{
+  display:flex;justify-content:center;align-items:center;
+  flex-shrink:0;
+}
+.pill{
+  background:var(--gl2);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--bd);
+  box-shadow:0 4px 24px var(--sd),inset 0 1px 0 rgba(255,255,255,.15);
+  border-radius:999px;
+  padding:12px 60px;
+  font-size:.95rem;font-weight:500;letter-spacing:.03em;
+  color:var(--txt);
+  transition:all .5s ease;
+}
+
+/* ═══ MAIN GRID ═══ */
+.grid{
+  flex:1;
+  display:grid;
+  grid-template-columns:220px 1fr 178px;
+  gap:12px;
+  min-height:0;
+}
+
+/* ══════════════════════════════════════════
+   LEFT COLUMN
+══════════════════════════════════════════ */
+.left{display:flex;flex-direction:column;gap:12px;}
+
+/* ── Music Player ── */
+.player{overflow:hidden;padding:0;flex-shrink:0;}
+
+.art-wrap{width:100%;height:118px;position:relative;overflow:hidden;}
+#wv{width:100%;height:100%;display:block;}
+
+/* progress */
+.prow{padding:8px 14px 6px;}
+.ptrack{
+  width:100%;height:3px;border-radius:10px;
+  background:var(--gl2);position:relative;
+  transition:background .5s ease;
+}
+.pfill{
+  height:100%;width:45%;border-radius:10px;
+  background:var(--prog);transition:background .5s ease;
+}
+.pthumb{
+  position:absolute;top:50%;left:45%;
+  transform:translate(-50%,-50%);
+  width:9px;height:9px;border-radius:50%;
+  background:var(--c1);
+  box-shadow:0 0 7px var(--g1);
+  transition:background .5s ease,box-shadow .5s ease;
+}
+
+/* controls */
+.ctrls{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;padding:7px 14px 13px;
+  border-top:1px solid var(--bd);
+}
+.cb{
+  background:transparent;border:none;color:var(--txt2);
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease;
+}
+.cb:hover{background:var(--gl2);color:var(--txt);}
+.cb.play{
+  width:38px;height:38px;
+  background:var(--gl2);border:1px solid var(--bd);
+  color:var(--c1);
+  transition:all .2s ease,color .5s ease,border-color .5s ease,background .5s ease;
+}
+.cb.play:hover{background:var(--c1);color:var(--bg);}
+.hidden{display:none!important;}
+
+/* ── Navigation ── */
+.nav{flex:1;display:flex;flex-direction:column;gap:0;padding:7px;}
+.ni{
+  display:block;padding:10px 15px;border-radius:10px;
+  font-size:.83rem;font-weight:400;
+  color:var(--txt2);
+  transition:all .2s ease;
+}
+.ni:hover{color:var(--txt);background:var(--gl2);}
+.ni.on{
+  color:var(--txt);font-weight:500;
+  background:var(--nav-hi);
+  border:1px solid var(--bd);
+  transition:background .5s ease,border-color .5s ease;
+}
+
+/* ══════════════════════════════════════════
+   CENTER
+══════════════════════════════════════════ */
+.center{position:relative;}
+.center-card{width:100%;height:100%;position:relative;overflow:hidden;}
+
+/* blurred inner gradient — the large blue/purple fill in the image */
+.inner-glow{
+  position:absolute;inset:0;
+  background:var(--center-grad);
+  filter:blur(1px);
+  pointer-events:none;
+  transition:background .5s ease;
+}
+
+/* inner blurred dashboard preview */
+.preview{
+  position:absolute;inset:0;
+  display:flex;
+  filter:blur(3px) brightness(.65) saturate(1.3);
+  pointer-events:none;
+}
+.psb{
+  width:70px;
+  background:var(--gl2);
+  border-right:1px solid var(--bd);
+  display:flex;flex-direction:column;gap:11px;padding:18px 9px;
+  transition:background .5s ease,border-color .5s ease;
+}
+.pb{height:6px;border-radius:6px;background:var(--bd);transition:background .5s ease;}
+.pb.a{background:var(--c1);}
+.pb.s{width:55%;}
+.pb.m{width:78%;}
+.pct{flex:1;padding:16px;display:flex;flex-direction:column;gap:11px;}
+.phd{height:8px;width:40%;border-radius:6px;background:var(--bd);}
+.pcds{display:flex;gap:9px;}
+.pcd{flex:1;height:54px;border-radius:10px;background:var(--gl2);border:1px solid var(--bd);transition:background .5s ease;}
+.pcd.ac{border-color:var(--c1);}
+.pch{flex:1;border-radius:10px;background:var(--gl2);border:1px solid var(--bd);transition:background .5s ease;}
+
+/* 4 floating glass icon cards */
+.floats{position:absolute;inset:0;pointer-events:none;}
+.fi{
+  position:absolute;
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:14px;padding:11px;
+  color:var(--c1);
+  transition:transform .1s ease,color .5s ease,border-color .5s ease;
+  pointer-events:auto;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+[data-theme="white"] .fi{
+  background:rgba(0,0,0,.06);
+  border-color:rgba(0,0,0,.10);
+}
+.fi2{color:var(--c2);}
+/* positions from image */
+.fi-a{top:30%;left:34%;}
+.fi-b{top:27%;left:55%;}
+.fi-c{top:57%;left:60%;}
+.fi-d{top:60%;left:42%;}
+
+/* bottom gradient line */
+.cline{
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--c1),var(--c2),transparent);
+  transition:background .5s ease;
+}
+
+/* ══════════════════════════════════════════
+   RIGHT COLUMN
+   Exactly as image: 2 small separate pill rows + big panel below
+══════════════════════════════════════════ */
+.right{display:flex;flex-direction:column;gap:10px;}
+
+/* Each pill row is its own glass card — matches image */
+.prow-card{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 13px;border-radius:14px;
+}
+.rico{
+  width:29px;height:29px;border-radius:50%;flex-shrink:0;
+  background:var(--gl2);border:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--txt2);transition:all .5s ease;
+}
+.rico.ac{color:var(--c1);}
+.rbar-bg{
+  flex:1;height:5px;border-radius:10px;
+  background:var(--gl2);transition:background .5s ease;
+}
+.rbar{
+  height:100%;border-radius:10px;
+  background:var(--prog);
+  transition:background .5s ease,width .8s cubic-bezier(.4,0,.2,1);
+}
+
+/* big empty panel */
+.rpanel{
+  flex:1;position:relative;overflow:hidden;
+  border-radius:18px;
+}
+.shim{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 35%,var(--gl2) 50%,transparent 65%);
+  animation:shim 3.5s ease-in-out infinite;
+}
+@keyframes shim{0%,100%{opacity:.25}50%{opacity:.65}}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+
+/* long bottom bar — pill shaped */
+.bbar{
+  flex:1;height:46px;border-radius:999px;
+  display:flex;align-items:center;padding:0 22px;
+}
+.bindic{
+  width:26%;height:3px;border-radius:10px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  transition:background .5s ease;
+}
+
+/* ══════════════════════════════════════════
+   THEME PILL  — exactly like the image:
+   [ ▲ up arrow ]
+   [ cyan dot   ]
+   [ purple dot ]
+   [ ✦ star     ]   ← next-theme button
+══════════════════════════════════════════ */
+.tpill{
+  width:52px;border-radius:999px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:7px;padding:11px 0;
+  flex-shrink:0;
+}
+/* up arrow button */
+.up-btn{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--gl2);border:1px solid var(--bd);
+  color:var(--txt2);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease,border-color .5s ease;
+  flex-shrink:0;
+}
+.up-btn:hover{color:var(--txt);border-color:var(--c1);transform:scale(1.1);}
+[data-theme="white"] .up-btn:hover{background:rgba(0,0,0,.08);}
+
+/* dots */
+.dots{display:flex;flex-direction:column;align-items:center;gap:9px;}
+.dot{
+  width:17px;height:17px;border-radius:50%;
+  position:relative;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.dot::after{
+  content:'';position:absolute;
+  inset:4px;border-radius:50%;background:currentColor;
+}
+.d1{
+  color:var(--c1);
+  box-shadow:0 0 0 2px var(--c1),0 0 12px var(--g1),0 0 24px var(--g1);
+  transition:color .5s ease,box-shadow .5s ease,transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.d2{
+  color:var(--c2);
+  box-shadow:0 0 0 2px var(--c2),0 0 12px var(--g2),0 0 24px var(--g2);
+  transition:color .5s ease,box-shadow .5s ease,transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* star / diamond button — matches image exactly */
+.star-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--gl2);border:1px solid var(--bd);
+  color:var(--txt2);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease,border-color .5s ease;
+  flex-shrink:0;
+}
+.star-btn:hover{color:var(--c1);border-color:var(--c1);transform:scale(1.1);box-shadow:0 0 12px var(--g1);}
+[data-theme="white"] .star-btn:hover{background:rgba(0,0,0,.06);}
+
+/* ══════════════════════════════════════════
+   MISC
+══════════════════════════════════════════ */
+::selection{background:var(--c1);color:var(--bg);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--bd);border-radius:10px;}
+</style>
+</head>
+<body>
+
+<!-- Background blobs -->
+<div class="blobs">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<div class="dash">
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="pill">Name</div>
+  </header>
+
+  <!-- ── MAIN GRID ── -->
+  <div class="grid">
+
+    <!-- LEFT -->
+    <div class="left">
+
+      <!-- Music Player -->
+      <div class="gc player">
+        <div class="art-wrap">
+          <canvas id="wv"></canvas>
+        </div>
+        <div class="prow">
+          <div class="ptrack">
+            <div class="pfill" id="pf"></div>
+            <div class="pthumb" id="pt"></div>
+          </div>
+        </div>
+        <div class="ctrls">
+          <button class="cb" aria-label="Prev">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polygon points="19 20 9 12 19 4 19 20"/>
+              <line x1="5" y1="19" x2="5" y2="5"/>
+            </svg>
+          </button>
+          <button class="cb play" id="playbtn">
+            <svg class="play-ic" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <svg class="pause-ic hidden" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+            </svg>
+          </button>
+          <button class="cb" aria-label="Next">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polygon points="5 4 15 12 5 20 5 4"/>
+              <line x1="19" y1="5" x2="19" y2="19"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <nav class="gc nav">
+        <a class="ni on" href="#" id="nd">Dashboard</a>
+        <a class="ni" href="#" id="np">Projects</a>
+        <a class="ni" href="#" id="na">Analytics</a>
+      </nav>
+
+    </div>
+
+    <!-- CENTER -->
+    <div class="center">
+      <div class="gc center-card">
+        <div class="inner-glow"></div>
+        <div class="preview">
+          <div class="psb">
+            <div class="pb a"></div>
+            <div class="pb s"></div>
+            <div class="pb m"></div>
+            <div class="pb s"></div>
+          </div>
+          <div class="pct">
+            <div class="phd"></div>
+            <div class="pcds">
+              <div class="pcd"></div>
+              <div class="pcd ac"></div>
+              <div class="pcd"></div>
+            </div>
+            <div class="pch"></div>
+          </div>
+        </div>
+        <div class="floats">
+          <div class="fi fi-a" id="fi1">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <polyline points="7 14 10 10 13 13 17 8"/>
+            </svg>
+          </div>
+          <div class="fi fi2 fi-b" id="fi2">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v9l7-4" fill="currentColor" fill-opacity=".15"/>
+              <line x1="12" y1="12" x2="12" y2="3"/>
+              <line x1="12" y1="12" x2="19" y2="8"/>
+            </svg>
+          </div>
+          <div class="fi fi-c" id="fi3">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="4" y="2" width="16" height="20" rx="2"/>
+              <line x1="8" y1="7" x2="16" y2="7"/>
+              <line x1="8" y1="11" x2="16" y2="11"/>
+              <line x1="8" y1="15" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <div class="fi fi-d" id="fi4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+        </div>
+        <div class="cline"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT — two pill rows + big panel -->
+    <div class="right">
+      <div class="gc prow-card">
+        <div class="rico">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="rbar-bg"><div class="rbar" style="width:72%"></div></div>
+      </div>
+      <div class="gc prow-card">
+        <div class="rico ac">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+        </div>
+        <div class="rbar-bg"><div class="rbar" style="width:58%"></div></div>
+      </div>
+      <div class="gc rpanel"><div class="shim"></div></div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="gc bbar">
+      <div class="bindic"></div>
+    </div>
+
+    <!-- THEME PILL -->
+    <div class="gc tpill">
+      <button class="up-btn" id="tprev" aria-label="Prev theme">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4L22 20H2Z"/>
+        </svg>
+      </button>
+      <div class="dots">
+        <div class="dot d1" id="d1"></div>
+        <div class="dot d2" id="d2"></div>
+      </div>
+      <button class="star-btn" id="tnext" aria-label="Next theme">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L14 9.5H22L15.5 14L17.5 21.5L12 17L6.5 21.5L8.5 14L2 9.5H10Z"/>
+        </svg>
+      </button>
+    </div>
+
+  </footer>
+</div>
+
+<script>
+/* ── THEME ENGINE ── */
+const R = document.documentElement;
+const THEMES = ['navy','olive','orange','white','black'];
+
+function cur(){ return R.getAttribute('data-theme')||THEMES[0]; }
+
+function setTheme(t){
+  R.setAttribute('data-theme',t);
+  localStorage.setItem('uid-theme',t);
+  ['d1','d2'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.style.transform='scale(1.6)';
+    setTimeout(()=>el.style.transform='scale(1)',260);
+  });
+  setTimeout(syncWave,60);
+}
+
+document.getElementById('tprev').onclick=()=>{
+  let i=THEMES.indexOf(cur())-1;
+  if(i<0)i=THEMES.length-1;
+  setTheme(THEMES[i]);
+};
+document.getElementById('tnext').onclick=()=>{
+  let i=THEMES.indexOf(cur())+1;
+  if(i>=THEMES.length)i=0;
+  setTheme(THEMES[i]);
+};
+
+// restore
+const sv=localStorage.getItem('uid-theme');
+if(sv&&THEMES.includes(sv)) R.setAttribute('data-theme',sv);
+
+/* ── WAVE CANVAS ── */
+const cv=document.getElementById('wv');
+const cx2=cv.getContext('2d');
+let playing=false,wt=0;
+let wc={r1:255,g1:107,b1:0,r2:255,g2:200,b2:100,r3:13,g3:27,b3:62};
+
+function syncWave(){
+  const cs=getComputedStyle(R);
+  function p(v){
+    const m=v.match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)/);
+    return m?[+m[1],+m[2],+m[3]]:[100,100,200];
+  }
+  const [r1,g1,b1]=p(cs.getPropertyValue('--w1').trim());
+  const [r2,g2,b2]=p(cs.getPropertyValue('--w2').trim());
+  const [r3,g3,b3]=p(cs.getPropertyValue('--w3').trim());
+  wc={r1,g1,b1,r2,g2,b2,r3,g3,b3};
+}
+
+function rsz(){
+  const rc=cv.parentElement.getBoundingClientRect();
+  const dpr=window.devicePixelRatio||1;
+  cv.width=rc.width*dpr; cv.height=rc.height*dpr;
+  cv.style.width=rc.width+'px'; cv.style.height=rc.height+'px';
+  cx2.scale(dpr,dpr);
+}
+
+function drawWave(){
+  const dpr=window.devicePixelRatio||1;
+  const W=cv.width/dpr,H=cv.height/dpr;
+  cx2.clearRect(0,0,W,H);
+
+  // rich background gradient (aurora style)
+  const bg=cx2.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0  ,`rgba(${wc.r1},${wc.g1},${wc.b1},.40)`);
+  bg.addColorStop(.35,`rgba(${wc.r2},${wc.g2},${wc.b2},.30)`);
+  bg.addColorStop(.70,`rgba(${wc.r1},${wc.g1},${wc.b1},.25)`);
+  bg.addColorStop(1  ,`rgba(${wc.r3},${wc.g3},${wc.b3},.45)`);
+  cx2.fillStyle=bg;
+  cx2.fillRect(0,0,W,H);
+
+  // radial glow spots (makes it look like the aurora art in image)
+  const spots=[
+    {x:W*.25,y:H*.4 ,r:W*.35,c:`rgba(${wc.r1},${wc.g1},${wc.b1},.28)`},
+    {x:W*.7 ,y:H*.55,r:W*.30,c:`rgba(${wc.r2},${wc.g2},${wc.b2},.20)`},
+    {x:W*.5 ,y:H*.3 ,r:W*.25,c:`rgba(${wc.r3},${wc.g3},${wc.b3},.18)`},
+  ];
+  spots.forEach(s=>{
+    const g=cx2.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r);
+    g.addColorStop(0,s.c); g.addColorStop(1,'transparent');
+    cx2.fillStyle=g; cx2.fillRect(0,0,W,H);
+  });
+
+  // wave layers
+  const sets=[[wc.r1,wc.g1,wc.b1],[wc.r2,wc.g2,wc.b2],[wc.r3,wc.g3,wc.b3]];
+  for(let l=0;l<3;l++){
+    const [r,g,b]=sets[l];
+    const spd=playing?.022+l*.009:.005+l*.002;
+    const amp=playing?12+l*6:4+l*2;
+    const yo=H*.52+l*10;
+    cx2.beginPath(); cx2.moveTo(0,H);
+    for(let x=0;x<=W;x+=2){
+      const y=yo
+        +Math.sin(x*.025+wt*spd)*amp
+        +Math.sin(x*.016+wt*spd*1.4)*(amp*.6)
+        +Math.cos(x*.04 +wt*spd*.8)*(amp*.3);
+      cx2.lineTo(x,y);
+    }
+    cx2.lineTo(W,H); cx2.closePath();
+    const gr=cx2.createLinearGradient(0,yo-amp,0,H);
+    gr.addColorStop(0,`rgba(${r},${g},${b},${.40-l*.09})`);
+    gr.addColorStop(1,`rgba(${r},${g},${b},.02)`);
+    cx2.fillStyle=gr; cx2.fill();
+  }
+  wt++;
+  requestAnimationFrame(drawWave);
+}
+
+/* ── PLAY BUTTON ── */
+const playBtn=document.getElementById('playbtn');
+const playIc=playBtn.querySelector('.play-ic');
+const pauseIc=playBtn.querySelector('.pause-ic');
+const pf=document.getElementById('pf');
+const pt=document.getElementById('pt');
+let prog=45;
+
+playBtn.onclick=()=>{
+  playing=!playing;
+  playIc.classList.toggle('hidden',playing);
+  pauseIc.classList.toggle('hidden',!playing);
+  if(playing) tick();
+};
+function tick(){
+  if(!playing)return;
+  prog=(prog+.15)%100;
+  pf.style.width=prog+'%'; pt.style.left=prog+'%';
+  requestAnimationFrame(tick);
+}
+
+/* ── NAV ── */
+document.querySelectorAll('.ni').forEach(n=>{
+  n.onclick=e=>{
+    e.preventDefault();
+    document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));
+    n.classList.add('on');
+  };
+});
+
+/* ── PARALLAX ── */
+const fis=document.querySelectorAll('.fi');
+document.addEventListener('mousemove',e=>{
+  const ox=(e.clientX-innerWidth/2)/(innerWidth/2);
+  const oy=(e.clientY-innerHeight/2)/(innerHeight/2);
+  fis.forEach((fi,i)=>{
+    const d=5+i*3;
+    fi.style.transform=`translate(${ox*d}px,${oy*d}px)`;
+  });
+});
+
+/* ── INIT ── */
+window.addEventListener('load',()=>{
+  rsz(); syncWave(); drawWave();
+  // animate bars
+  document.querySelectorAll('.rbar').forEach(b=>{
+    const w=b.style.width; b.style.width='0%';
+    setTimeout(()=>b.style.width=w,200);
+  });
+});
+window.addEventListener('resize',rsz);
+</script>
+</body>
+</html>
