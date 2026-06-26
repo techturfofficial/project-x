@@ -1,0 +1,13 @@
+/* Debug Outline Stylesheet
+   Adds a 1px solid red outline to every element for layout debugging.
+   To disable: remove or comment out the <link> to this file in preview/index.html.
+*/
+
+*, *::before, *::after {
+  outline: 1px solid rgba(255, 0, 0, 0.95) !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Prevent mobile tap highlight from interfering visually */
+* { -webkit-tap-highlight-color: transparent; }
