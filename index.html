@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora UI - Theme Variations</title>
+    <link rel="stylesheet" href="styles.css?v=6">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for modern sleek icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body data-theme="theme-1">
+    
+    <div class="background-glow"></div>
+    <div class="background-glow glow-2"></div>
+
+    <div class="app-container">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="theme-switcher">
+                <button class="theme-btn active" data-set-theme="theme-1" style="background: #E8F5E9;" title="Soft Mint"></button>
+                <button class="theme-btn" data-set-theme="theme-2" style="background: #FF6B6B;" title="Coral Pink"></button>
+                <button class="theme-btn" data-set-theme="theme-3" style="background: #FDFBF7;" title="Warm Cream"></button>
+                <button class="theme-btn" data-set-theme="theme-4" style="background: #0D9488;" title="Deep Teal"></button>
+                <button class="theme-btn" data-set-theme="theme-5" style="background: #F3E8FF;" title="Soft Lavender"></button>
+            </div>
+            <div class="pill-badge">
+                <i class="ph-fill ph-star-four" style="color: var(--accent);"></i>
+                AURORA // <span class="badge-highlight">NAME</span>
+                <div class="dot" style="background-color: var(--accent); box-shadow: 0 0 8px var(--accent-glow);"></div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Left Sidebar -->
+            <aside class="left-sidebar">
+                <div class="glass-panel now-playing">
+                    <div class="media-art">
+                        <div class="media-ring m-ring-1"></div>
+                        <div class="media-ring m-ring-2"></div>
+                        <div class="media-ring m-ring-3"></div>
+                        <button class="play-btn"><i class="ph-fill ph-play"></i></button>
+                    </div>
+                    <div class="media-info">
+                        <span class="label">NOW PLAYING</span>
+                        <div class="title-row">
+                            <h4>Liquid Drift · 03</h4>
+                            <span class="time">02:14 / 04:38</span>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="glass-panel navigation">
+                    <span class="section-title">NAVIGATION</span>
+                    <ul>
+                        <li class="active">
+                            <i class="ph ph-bounding-box"></i> Spaces
+                            <div class="dot"></div>
+                        </li>
+                        <li>
+                            <i class="ph ph-waves"></i> Liquid Flows
+                        </li>
+                        <li>
+                            <i class="ph ph-stack"></i> Stack
+                        </li>
+                        <li>
+                            <i class="ph ph-compass"></i> Explore
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content glass-panel">
+                <div class="main-header">
+                    <span class="status-indicator"><div class="dot"></div> WORKSPACE · LIVE SESSION</span>
+                    <div class="actions">
+                        <button class="icon-btn"><i class="ph ph-arrows-out"></i></button>
+                        <button class="icon-btn"><i class="ph ph-dots-three"></i></button>
+                    </div>
+                </div>
+
+                <div class="hero-content">
+                    <span class="hero-subtitle">LIQUID GLASS · 2026</span>
+                    <h1 class="hero-title">A canvas that<br>breathes <span class="highlight">light.</span></h1>
+                    <p class="hero-desc">Compose translucent layers, drift through aurora gradients, and let every surface refract the next. Designed for spatial workflows.</p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="stat-label">LAYERS</span>
+                        <div class="stat-value">12</div>
+                        <span class="stat-sub">active</span>
+                    </div>
+                    <div class="stat-card highlight-card">
+                        <span class="stat-label">REFRACTION</span>
+                        <div class="stat-value">84%</div>
+                        <span class="stat-sub">depth index</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">BLOOM</span>
+                        <div class="stat-value">0.62</div>
+                        <span class="stat-sub">luminance</span>
+                    </div>
+                </div>
+                
+                <!-- Inner glow sphere visual with concentric rings -->
+                <div class="hero-sphere-wrapper">
+                    <div class="hero-sphere"></div>
+                    <div class="sphere-ring ring-1"></div>
+                    <div class="sphere-ring ring-2"></div>
+                    <div class="sphere-ring ring-3"></div>
+                    <div class="sphere-ring ring-4"></div>
+                    <div class="sphere-ring ring-5"></div>
+                    <div class="sphere-ring ring-6"></div>
+                    <div class="sphere-ring ring-7"></div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar -->
+            <aside class="right-sidebar">
+                <div class="glass-panel quick-actions">
+                    <span class="section-title">QUICK ACTIONS</span>
+                    <div class="action-buttons">
+                        <button class="btn-outline"><i class="ph ph-plus"></i> Create</button>
+                        <button class="btn-outline"><i class="ph ph-funnel"></i> Filter</button>
+                    </div>
+                </div>
+
+                <div class="glass-panel activity-feed">
+                    <div class="activity-header">
+                        <span class="section-title">ACTIVITY</span>
+                        <h4>Resonance feed</h4>
+                        <div class="dot float-right"></div>
+                    </div>
+                    
+                    <div class="feed-list">
+                        <div class="feed-item">
+                            <div class="feed-icon c-mint"></div>
+                            <div class="feed-details">
+                                <h5>Layer drift synced</h5>
+                                <span>just now · session</span>
+                            </div>
+                            <span class="time">2m</span>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon c-lavender"></div>
+                            <div class="feed-details">
+                                <h5>Bloom recalibrated</h5>
+                                <span>just now · session</span>
+                            </div>
+                            <span class="time">11m</span>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon c-teal"></div>
+                            <div class="feed-details">
+                                <h5>Aurora preset saved</h5>
+                                <span>just now · session</span>
+                            </div>
+                            <span class="time">1h</span>
+                        </div>
+                    </div>
+
+                    <div class="activity-footer">
+                        <span class="status-text">Awaiting next signal...</span>
+                        <span class="live-text">LIVE</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Bottom Input Bar -->
+        <div class="bottom-bar glass-panel">
+            <button class="icon-btn mic-btn"><i class="ph-fill ph-microphone"></i></button>
+            <input type="text" placeholder="Whisper an intent... ⌘ K">
+            <div class="right-actions">
+                <button class="icon-btn send-btn"><i class="ph-fill ph-paper-plane-tilt"></i></button>
+                <button class="cyan-circle-btn"></button>
+            </div>
+        </div>
+
+        <div class="status-pill">
+            <div class="active-dot"></div>
+            <span>Made with Emergent</span>
+        </div>
+    </div>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
